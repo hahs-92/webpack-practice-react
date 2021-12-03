@@ -4,7 +4,7 @@ import actions from '../actions';
 import '../styles/components/Products.styl';
 import Product from './Product';
 
-const Products = (props) => {
+const Products = props => {
   const { products } = props;
 
   const handleAddToCart = product => () => {
@@ -26,7 +26,7 @@ const Products = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     products: state.products,
   };

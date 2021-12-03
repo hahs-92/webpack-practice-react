@@ -2,9 +2,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-/** @type {import('webpack').Configuration} */;
-
-module.exports = {
+/** @type {import('webpack').Configuration} */ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -39,11 +37,7 @@ module.exports = {
       },
       {
         test: /\.css|.styl$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'stylus-loader',
-        ],
+        use: ['style-loader', 'css-loader', 'stylus-loader'],
       },
     ],
   },
