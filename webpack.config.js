@@ -3,6 +3,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPLugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -42,6 +43,13 @@ module.exports = {
           'stylus-loader',
         ],
       },
+      {
+        test: /\.(png|jpg)$/i,
+        type: 'asset',
+        generator: {
+          filename: 'assets/images/[hash][ext]',
+        },
+      },
     ],
   },
   devServer: {
@@ -54,6 +62,13 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'assets/[name].css',
+    }),
+    new ImageMinimizerPlugin({
+      minimizerOptions: {
+        plugins: [
+          ['optipng', { optimizationLevel: 5 }],
+        ],
+      },
     }),
   ],
   optimization: {

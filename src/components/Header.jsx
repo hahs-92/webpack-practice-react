@@ -2,11 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../styles/components/Header.styl';
+import logo from '../assets/logo-gndx.png';
 
 const Header = props => (
   <div className="Header">
     <h1 className="Header-title">
-      <Link to="/">Platzi Store</Link>
+      <Link to="/">
+        <img src={logo} alt="logo" width={32} height={32} />
+        Platzi Store
+      </Link>
     </h1>
     <div className="Header-checkout">
       <Link to="/checkout">
@@ -19,7 +23,7 @@ const Header = props => (
   </div>
 );
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cart: state.cart,
   };

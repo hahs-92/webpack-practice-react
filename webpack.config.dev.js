@@ -39,6 +39,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
         test: /\.css|.styl$/,
         use: ['style-loader', 'css-loader', 'stylus-loader'],
       },
+      {
+        test: /\.(png|jpg)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
