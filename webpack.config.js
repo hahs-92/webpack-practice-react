@@ -14,7 +14,7 @@ module.exports = {
   },
   mode: 'production',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
@@ -49,6 +49,11 @@ module.exports = {
         generator: {
           filename: 'assets/images/[hash][ext]',
         },
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: '/node_modules/',
       },
     ],
   },

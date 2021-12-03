@@ -16,7 +16,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
     open: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
@@ -42,6 +42,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
       {
         test: /\.(png|jpg)$/i,
         type: 'asset/resource',
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: '/node_modules/',
       },
     ],
   },
