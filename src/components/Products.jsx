@@ -1,14 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import actions from '../actions';
+import React, { useContext } from 'react';
+// import { connect } from 'react-redux';
+// import actions from '../actions';
 import '../styles/components/Products.styl';
 import Product from './Product';
+import AppContext from '../context/AppContext';
 
-const Products = props => {
-  const { products } = props;
+const Products = () => {
+  // const { products } = props;
+  const { products } = useContext(AppContext);
 
   const handleAddToCart = product => () => {
-    props.addToCart(product);
+    // props.addToCart(product);
+    console.log((product));
   };
 
   return (
@@ -26,14 +29,16 @@ const Products = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    products: state.products,
-  };
-};
+export default Products;
 
-const mapDispatchToProps = {
-  addToCart: actions.addToCart,
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     products: state.products,
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+// const mapDispatchToProps = {
+//   addToCart: actions.addToCart,
+// };
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Products);
