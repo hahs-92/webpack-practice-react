@@ -1,17 +1,22 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPLugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+
+/** @type {import('webpack').Configuration} */;
 
 module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    clean: true,
   },
-  mode: 'production',
+  mode: 'development',
+  devServer: {
+    compress: true,
+    historyApiFallback: true,
+    port: 3007,
+    open: true,
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
@@ -35,17 +40,12 @@ module.exports = {
       {
         test: /\.css|.styl$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+          'style-loader',
           'css-loader',
           'stylus-loader',
         ],
       },
     ],
-  },
-  devServer: {
-    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebPackPlugin({
@@ -56,11 +56,4 @@ module.exports = {
       filename: 'assets/[name].css',
     }),
   ],
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new CssMinimizerPLugin(),
-      new TerserPlugin(),
-    ],
-  },
 };
