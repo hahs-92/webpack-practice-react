@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
   },
   mode: 'development',
   devServer: {
@@ -14,6 +14,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
     historyApiFallback: true,
     port: 3007,
     open: true,
+    hot: true,
   },
   resolve: {
     extensions: ['.tsx', '.js', '.jsx'],
@@ -59,4 +60,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
       filename: 'assets/[name].css',
     }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
 };
