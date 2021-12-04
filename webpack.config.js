@@ -5,11 +5,14 @@ const CssMinimizerPLugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
+/** @type {import('webpack').Configuration} */
+
 module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
     clean: true,
   },
   mode: 'production',
@@ -79,5 +82,29 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [new CssMinimizerPLugin(), new TerserPlugin()],
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        default: false,
+        commons: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          chunks: 'all',
+          name: 'commons',
+          filename: 'assets/common.[chunkhash].js',
+          reuseExistingChunk: true,
+          enforce: true,
+          priority: 20,
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
+          name: 'vendors',
+          filename: 'assets/vendor.[chunkhash].js',
+          reuseExistingChunk: true,
+          enforce: true,
+          priority: 10,
+        },
+      },
+    },
   },
 };
